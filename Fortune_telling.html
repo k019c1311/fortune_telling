@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <title>簡易占いページ</title>
+        <meta charset="utf-8">
+        <link rel = "stylesheet" href="design.css">
+   </head>
+   <body>
+      <h1>占いの館</h1>
+         <input type="button" value=" 占い開始( ※一回だけです )" 
+            onclick="fortune_telling()">
+      
+      <script language="JavaScript">
+         let x = ['恋愛運','金運','勝負運','仕事運','勉強運'];
+         flag = false;
+         
+         function getRandomInt(max){
+            return Math.floor(Math.random()*max+1)
+         }
+         
+         function fortune_telling(){
+            var body = document.getElementsByTagName("body")[0];
+
+            var table = document.createElement('table');
+            var tableBody = document.createElement("tbody");
+
+            if (flag){
+               alert("占いは一回だけです。（再度行う場合はF5キーを押して下さい）");
+               return;
+            }
+            
+            flag = true;
+            
+            for(let i = 0; i < 5; i++){
+               var row = document.createElement("tr");
+               var cell = document.createElement("td");
+               fortune = document.createTextNode(x[i]);
+               cell.appendChild(fortune);
+               row.appendChild(cell);
+
+               star = (getRandomInt(5));
+               
+               for(let j = 0; j < star; j++){
+                  var cell = document.createElement("td");
+                  BlackStar = document.createTextNode("★");
+                  cell.appendChild(BlackStar);
+                  row.appendChild(cell);
+               }
+               for(let k = 0; k < 5 - star; k++){
+                  var cell = document.createElement("td");
+                  WhiteStar = document.createTextNode("☆");
+                  cell.appendChild(WhiteStar);
+                  row.appendChild(cell);
+               }
+               tableBody.appendChild(row);
+            }
+            table.appendChild(tableBody);
+            body.appendChild(table);
+         }
+      </script> 
+   </body>
+</html>
